@@ -1,4 +1,4 @@
-package com.example.qyqfi.database_project;
+package com.example.qyqfi.databaseii_app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.qyqfi.database_project", appContext.getPackageName());
+        assertEquals("com.example.qyqfi.databaseii_app", appContext.getPackageName());
     }
 }

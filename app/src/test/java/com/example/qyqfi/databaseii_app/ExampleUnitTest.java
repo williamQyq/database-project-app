@@ -1,4 +1,4 @@
-package com.example.qyqfi.database_project;
+package com.example.qyqfi.databaseii_app;
 
 import org.junit.Test;
 
