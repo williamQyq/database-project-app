@@ -27,7 +27,8 @@
         <activity android:name=".ViewMtorMteeActivity" />
         <activity android:name=".ParentRegisterActivity" />
         <activity android:name=".ParentLoginActivity" />
-        <activity android:name=".ParentMainMenuActivity"></activity>
+        <activity android:name=".ParentMainMenuActivity" />
+        <activity android:name=".ChangeChildProfileActivity"></activity>
     </application>
 
 </manifest>
