@@ -24,7 +24,10 @@
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".ChangeProfileActivity" />
         <activity android:name=".ViewSectionActivity" />
-        <activity android:name=".ViewMtorMteeActivity"></activity>
+        <activity android:name=".ViewMtorMteeActivity" />
+        <activity android:name=".ParentRegisterActivity" />
+        <activity android:name=".ParentLoginActivity" />
+        <activity android:name=".ParentMainMenuActivity"></activity>
     </application>
 
 </manifest>

@@ -24,20 +24,21 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
+public class ParentLoginActivity extends AppCompatActivity {
+
     private EditText email, password;
     private Button btn_login;
     private ProgressBar loading;
-    private static String URL_LOGIN = "http://192.168.1.174/db_android/login.php";
+    private static String URL_LOGIN = "http://192.168.1.174/db_android/parent_login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_parent_login);
 
         loading = findViewById(R.id.loading);
-        email = findViewById(R.id.stu_login_email);
-        password = findViewById(R.id.stu_login_password);
+        email = findViewById(R.id.login_email);
+        password = findViewById(R.id.login_password);
         btn_login = findViewById(R.id.btn_login);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -74,10 +75,10 @@ public class LoginActivity extends AppCompatActivity {
                                     String name1 = object.getString("name").trim();
                                     String email1 = object.getString("email").trim();
 
-                                    Toast.makeText(LoginActivity.this, "Success Login! \n Email: "
+                                    Toast.makeText(ParentLoginActivity.this, "Success Login! \n Email: "
                                             +email1+"Your name: "+name1, Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                                    Intent intent = new Intent(ParentLoginActivity.this, ParentMainMenuActivity.class);
                                     intent.putExtra("email",email);
                                     startActivity(intent);
 
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(LoginActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(ParentLoginActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
                             btn_login.setVisibility(View.VISIBLE);
                         }
@@ -97,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(ParentLoginActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
                         btn_login.setVisibility(View.VISIBLE);
                     }

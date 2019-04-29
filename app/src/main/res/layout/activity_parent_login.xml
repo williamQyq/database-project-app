@@ -15,17 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/name"
-            android:hint="Name"
-            android:inputType="textPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/email"
+            android:id="@+id/login_email"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
@@ -36,31 +26,9 @@
         android:layout_height="wrap_content"
         app:passwordToggleEnabled="true">
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/login_password"
             android:hint="Password"
             android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-        <EditText
-            android:id="@+id/c_password"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-        <EditText
-            android:id="@+id/phone_num"
-            android:hint="Phone Number"
-            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </android.support.design.widget.TextInputLayout>
@@ -71,10 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/btn_regist"
+        android:id="@+id/btn_login"
         android:backgroundTint="@color/colorPrimary"
         android:textColor="@android:color/white"
-        android:text="Submit"
+        android:text="Login"
         android:layout_marginTop="38dp"
         android:layout_width="match_parent"
         android:layout_height="55dp" />

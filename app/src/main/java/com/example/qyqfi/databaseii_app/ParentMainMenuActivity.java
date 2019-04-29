@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class ParentMainMenuActivity extends AppCompatActivity {
 
     private Button btn_logout,btn_change_profile,btn_view_section,btn_view_mtor_mtee;
     @Override

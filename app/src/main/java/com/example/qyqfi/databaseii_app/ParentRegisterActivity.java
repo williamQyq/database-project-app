@@ -1,9 +1,7 @@
 package com.example.qyqfi.databaseii_app;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,24 +22,22 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChangeProfileActivity extends AppCompatActivity {
+public class ParentRegisterActivity extends AppCompatActivity {
 
-    private EditText name, email, password, c_password,phone_num;
+    private EditText name, email,child_email, password, c_password,phone_num;
     private Button btn_regist;
     private ProgressBar loading;
-    private static String URL_REGIST = "http://192.168.1.174/db_android/change_profile.php";
+    private static String URL_REGIST = "http://192.168.1.174/db_android/parent_register.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
-        Intent intent = getIntent();
-        final String extraEmail = intent.getStringExtra("email");
+        setContentView(R.layout.activity_parent_register);
 
         loading = findViewById(R.id.loading);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
+        child_email = findViewById(R.id.child_email);
         password = findViewById(R.id.password);
         c_password = findViewById(R.id.c_password);
         phone_num = findViewById(R.id.phone_num);
@@ -50,7 +46,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(checkPassword()) {
-                    Regist(extraEmail);
+                    Regist();
                     finish();
                 }
             }
@@ -62,18 +58,18 @@ public class ChangeProfileActivity extends AppCompatActivity {
         if(password.equals(c_password)){
             return true;
         }
-        Toast.makeText(ChangeProfileActivity.this, "passwords are not same!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(ParentRegisterActivity.this, "passwords are not same!",Toast.LENGTH_SHORT).show();
         return false;
     }
-    private void Regist(String extraEmail){
+    private void Regist(){
         loading.setVisibility(View.VISIBLE);
         btn_regist.setVisibility(View.GONE);
 
         final String name = this.name.getText().toString().trim();
         final String email = this.email.getText().toString().trim();
+        final String child_email = this.child_email.getText().toString().trim();
         final String password = this.password.getText().toString().trim();
         final String phone_num = this.phone_num.getText().toString().trim();
-        final String oldEmail = extraEmail;
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
@@ -86,11 +82,11 @@ public class ChangeProfileActivity extends AppCompatActivity {
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
-                                Toast.makeText(ChangeProfileActivity.this, "Change Profile Success!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ParentRegisterActivity.this, "Register Success!",Toast.LENGTH_SHORT).show();
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(ChangeProfileActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(ParentRegisterActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
                             btn_regist.setVisibility(View.VISIBLE);
                         }
@@ -100,7 +96,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChangeProfileActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(ParentRegisterActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
                         btn_regist.setVisibility(View.VISIBLE);
                     }
@@ -111,9 +107,9 @@ public class ChangeProfileActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("name",name);
                 params.put("email",email);
+                params.put("child_email",child_email);
                 params.put("password",password);
                 params.put("phone_num",phone_num);
-                params.put("old_email",oldEmail);
                 return params;
             }
         };

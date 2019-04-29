@@ -17,7 +17,7 @@ public class HomeActivity extends AppCompatActivity {
         btn_stu_regist = findViewById(R.id.btn_stu_regist);
         btn_par_regist = findViewById(R.id.btn_par_regist);
         btn_stu_login = findViewById(R.id.btn_stu_login);
-        btn_par_regist = findViewById(R.id.btn_par_login);
+        btn_par_login = findViewById(R.id.btn_par_login);
 
         btn_stu_regist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +32,19 @@ public class HomeActivity extends AppCompatActivity {
                 openLoginActivity();
             }
         });
+        btn_par_regist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openParentRegisterActivity();
+            }
+        });
+
+        btn_par_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openParentLoginActivity();
+            }
+        });
     }
     public void openRegisterActivity(){
         Intent intent = new Intent(this, RegisterActivity.class);
@@ -39,6 +52,14 @@ public class HomeActivity extends AppCompatActivity {
     }
     public void openLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+    public void openParentRegisterActivity(){
+        Intent intent = new Intent(this, ParentRegisterActivity.class);
+        startActivity(intent);
+    }
+    public void openParentLoginActivity(){
+        Intent intent = new Intent(this, ParentLoginActivity.class);
         startActivity(intent);
     }
 }
