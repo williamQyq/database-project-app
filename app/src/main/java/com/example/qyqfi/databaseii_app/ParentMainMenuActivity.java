@@ -18,7 +18,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         btn_change_profile = findViewById(R.id.btn_change_profile);
         btn_change_child_profile = findViewById(R.id.btn_change_child_profile);
         btn_view_section = findViewById(R.id.btn_view_section);
-        btn_view_mtor_mtee = findViewById(R.id.btn_view_mtor_mtee);
 
         Intent intent = getIntent();
         final String extraEmail = intent.getStringExtra("email");
@@ -48,12 +47,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
                 openViewSectionActivity(extraEmail);
             }
         });
-        btn_view_mtor_mtee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openViewMtorMteeActivity(extraEmail);
-            }
-        });
+
 
     }
     public void openChangeProfileActivity(String email){
@@ -68,11 +62,6 @@ public class ParentMainMenuActivity extends AppCompatActivity {
     }
     public void openViewSectionActivity(String email){
         Intent intent = new Intent(this, ViewSectionActivity.class);
-        intent.putExtra("email",email);
-        startActivity(intent);
-    }
-    public void openViewMtorMteeActivity(String email){
-        Intent intent = new Intent(this, ViewMtorMteeActivity.class);
         intent.putExtra("email",email);
         startActivity(intent);
     }

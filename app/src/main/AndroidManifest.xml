@@ -23,12 +23,12 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".ChangeProfileActivity" />
-        <activity android:name=".ViewMtorMteeActivity" />
         <activity android:name=".ParentRegisterActivity" />
         <activity android:name=".ParentLoginActivity" />
         <activity android:name=".ParentMainMenuActivity" />
         <activity android:name=".ChangeChildProfileActivity" />
-        <activity android:name=".ViewSectionActivity"></activity>
+        <activity android:name=".ViewSectionActivity" />
+        <activity android:name=".EnrollSectionActivity"></activity>
     </application>
 
 </manifest>
