@@ -1,6 +1,7 @@
 package com.example.qyqfi.databaseii_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,12 +28,14 @@ public class ChangeChildProfileActivity extends AppCompatActivity {
     private EditText old_child_email,name, email, password, c_password,phone_num;
     private Button btn_regist;
     private ProgressBar loading;
-    private static String URL_REGIST = "http://192.168.1.174/db_android/change_child_profile.php";
-
+    private String URL;
+    private static String name_URL = "URL_CHANGE_CHILD_PROFILE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_child_profile);
+
+        URL = retrieveURL(name_URL);
 
         Intent intent = getIntent();
         final String extraEmail = intent.getStringExtra("email");
@@ -55,6 +58,14 @@ public class ChangeChildProfileActivity extends AppCompatActivity {
             }
         });
     }
+    public String retrieveURL(String nameURL){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile",MODE_PRIVATE);
+        String result = prefs.getString(nameURL,null);
+        if(result != null){
+            return result;
+        }
+        return null;
+    }
     private boolean checkPassword(){
         final String password = this.password.getText().toString().trim();
         final String c_password = this.c_password.getText().toString().trim();
@@ -76,7 +87,7 @@ public class ChangeChildProfileActivity extends AppCompatActivity {
         final String oldEmail = extraEmail;
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

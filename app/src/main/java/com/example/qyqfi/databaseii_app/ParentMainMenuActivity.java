@@ -54,6 +54,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChangeProfileActivity.class);
         intent.putExtra("email",email);
         startActivity(intent);
+        finish();
     }
     public void openChangeChildProfileActivity(String email){
         Intent intent = new Intent(this, ChangeChildProfileActivity.class);

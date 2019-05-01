@@ -1,6 +1,7 @@
 package com.example.qyqfi.databaseii_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,13 +34,18 @@ public class EnrollSectionActivity extends AppCompatActivity {
     private Button btn_enroll_as_mtor,btn_enroll_as_mtee;
     private ProgressBar loading;
     private LinearLayout linearLayout;
-    private static String URL_MTOR_MTEE_INFO = "http://192.168.1.174/db_android/get_mtor_mtee_info.php";
-    public String URL_ENROLL = "";
+    private String URL;
+    private String URL_MTOR_MTEE_INFO;
+    private static String name_URL_1 = "URL_ENROLL_MTEE_SECTION";
+    private static String name_URL_2 = "URL_ENROLL_MTOR_SECTION";
+    private static String getName_URL_3 = "URL_GET_MTOR_MTEE_INFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enroll_section);
+
+        URL_MTOR_MTEE_INFO = retrieveURL(getName_URL_3);
 
         linearLayout = findViewById(R.id.rootLayout);
         loading = findViewById(R.id.loading);
@@ -62,23 +68,31 @@ public class EnrollSectionActivity extends AppCompatActivity {
 //            btn_enroll_as_mtee.setVisibility(View.VISIBLE);
 //            btn_enroll_as_mtor.setVisibility(View.VISIBLE);
 //        }
-
+//working here===========================================
         jsonParseMentorMentee(extraEmail,cid,title,sec_id);
 
         btn_enroll_as_mtor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    URL_ENROLL = "http://192.168.1.174/db_android/enroll_mtor_section.php";
+                    URL = retrieveURL(name_URL_2);
                     enroll(extraEmail,cid,title,sec_id);
             }
         });
         btn_enroll_as_mtee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL_ENROLL = "http://192.168.1.174/db_android/enroll_mtee_section.php";
+                URL = retrieveURL(name_URL_1);
                 enroll(extraEmail,cid,title,sec_id);
             }
         });
+    }
+    public String retrieveURL(String nameURL){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile",MODE_PRIVATE);
+        String result = prefs.getString(nameURL,null);
+        if(result != null){
+            return result;
+        }
+        return  null;
     }
     private void jsonParseMentorMentee(final String email, final String cid, final String title, final String sec_id){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_MTOR_MTEE_INFO,
@@ -129,7 +143,7 @@ public class EnrollSectionActivity extends AppCompatActivity {
         btn_enroll_as_mtor.setVisibility(View.GONE);
         btn_enroll_as_mtee.setVisibility(View.GONE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ENROLL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -145,7 +159,8 @@ public class EnrollSectionActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
+//                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
                             btn_enroll_as_mtor.setVisibility(View.VISIBLE);
                             btn_enroll_as_mtee.setVisibility(View.VISIBLE);
@@ -155,7 +170,8 @@ public class EnrollSectionActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
+//                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
                         btn_enroll_as_mtor.setVisibility(View.VISIBLE);
                         btn_enroll_as_mtee.setVisibility(View.VISIBLE);

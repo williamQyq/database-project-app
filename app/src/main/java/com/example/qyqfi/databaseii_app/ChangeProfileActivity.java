@@ -1,6 +1,7 @@
 package com.example.qyqfi.databaseii_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,13 +30,14 @@ public class ChangeProfileActivity extends AppCompatActivity {
     private EditText name, email, password, c_password,phone_num;
     private Button btn_regist;
     private ProgressBar loading;
-    private static String URL_REGIST = "http://192.168.1.174/db_android/change_profile.php";
-
+    private String URL;
+    private static String nameURL = "URL_CHANGE_PROFILE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        URL = retrieveURL(nameURL);
         Intent intent = getIntent();
         final String extraEmail = intent.getStringExtra("email");
 
@@ -55,6 +57,14 @@ public class ChangeProfileActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public String retrieveURL(String nameURL){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile",MODE_PRIVATE);
+        String result = prefs.getString(nameURL,null);
+        if(result != null){
+            return result;
+        }
+        return  null;
     }
     private boolean checkPassword(){
         final String password = this.password.getText().toString().trim();
@@ -76,7 +86,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
         final String oldEmail = extraEmail;
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

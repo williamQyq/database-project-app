@@ -1,5 +1,6 @@
 package com.example.qyqfi.databaseii_app;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,12 +28,15 @@ public class ParentRegisterActivity extends AppCompatActivity {
     private EditText name, email,child_email, password, c_password,phone_num;
     private Button btn_regist;
     private ProgressBar loading;
-    private static String URL_REGIST = "http://192.168.1.174/db_android/parent_register.php";
+    private String URL_PAR_REGIST;
+    private static String name_URL = "URL_PAR_REGIST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_register);
+
+        URL_PAR_REGIST = retrieveURL(name_URL);
 
         loading = findViewById(R.id.loading);
         name = findViewById(R.id.name);
@@ -51,6 +55,14 @@ public class ParentRegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public String retrieveURL(String nameURL){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile",MODE_PRIVATE);
+        String result = prefs.getString(nameURL,null);
+        if(result != null){
+            return result;
+        }
+        return  null;
     }
     private boolean checkPassword(){
         final String password = this.password.getText().toString().trim();
@@ -72,7 +84,7 @@ public class ParentRegisterActivity extends AppCompatActivity {
         final String phone_num = this.phone_num.getText().toString().trim();
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGIST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_PAR_REGIST,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

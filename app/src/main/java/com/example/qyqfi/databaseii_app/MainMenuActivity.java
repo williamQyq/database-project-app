@@ -46,6 +46,7 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChangeProfileActivity.class);
         intent.putExtra("email",email);
         startActivity(intent);
+        finish();
     }
     public void openViewSectionActivity(String email){
         Intent intent = new Intent(this, ViewSectionActivity.class);

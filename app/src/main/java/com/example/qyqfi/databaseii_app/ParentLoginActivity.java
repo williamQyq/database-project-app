@@ -1,6 +1,7 @@
 package com.example.qyqfi.databaseii_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,12 +30,15 @@ public class ParentLoginActivity extends AppCompatActivity {
     private EditText email, password;
     private Button btn_login;
     private ProgressBar loading;
-    private static String URL_LOGIN = "http://192.168.1.174/db_android/parent_login.php";
+    private String URL_PAR_LOGIN;
+    private static String name_URL = "URL_PAR_LOGIN";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parent_login);
+
+        URL_PAR_LOGIN = retrieveURL(name_URL);
 
         loading = findViewById(R.id.loading);
         email = findViewById(R.id.login_email);
@@ -56,11 +60,19 @@ public class ParentLoginActivity extends AppCompatActivity {
             }
         });
     }
+    public String retrieveURL(String nameURL){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile",MODE_PRIVATE);
+        String result = prefs.getString(nameURL,null);
+        if(result != null){
+            return result;
+        }
+        return  null;
+    }
     private void Login(final String email, final String password){
         loading.setVisibility(View.VISIBLE);
         btn_login.setVisibility(View.GONE);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_LOGIN,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_PAR_LOGIN,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

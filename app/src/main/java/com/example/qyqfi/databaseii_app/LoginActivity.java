@@ -1,8 +1,13 @@
 package com.example.qyqfi.databaseii_app;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +34,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText email, password;
     private Button btn_login;
     private ProgressBar loading;
-    private static String URL_LOGIN = "http://192.168.1.174/db_android/login.php";
+    private String URL_LOGIN;
+    private static String nameURL = "URL_LOGIN";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.stu_login_email);
         password = findViewById(R.id.stu_login_password);
         btn_login = findViewById(R.id.btn_login);
+
+        retrieveURL(nameURL);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +64,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    protected void retrieveURL(String nameURL){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile",MODE_PRIVATE);
+        String result = prefs.getString(nameURL,null);
+        if(result != null){
+            URL_LOGIN = result;
+        }
     }
     private void Login(final String email, final String password){
         loading.setVisibility(View.VISIBLE);

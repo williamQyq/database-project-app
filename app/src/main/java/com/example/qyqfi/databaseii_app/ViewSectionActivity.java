@@ -1,6 +1,7 @@
 package com.example.qyqfi.databaseii_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,12 +26,16 @@ import org.json.JSONObject;
 public class ViewSectionActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private RequestQueue mQueue;
-    private static String url = "http://192.168.1.174/db_android/get_section.php";
+    private String URL_GET_SECTION;
+    private static String name_URL = "URL_GET_SECTION";
+
     private String extralEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_section);
+
+        URL_GET_SECTION = retrieveURL(name_URL);
 
         linearLayout = findViewById(R.id.rootLayout);
 
@@ -44,8 +49,16 @@ public class ViewSectionActivity extends AppCompatActivity {
         jsonParseSection();
 
     }
+    public String retrieveURL(String nameURL){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile",MODE_PRIVATE);
+        String result = prefs.getString(nameURL,null);
+        if(result != null){
+            return result;
+        }
+        return  null;
+    }
     public void jsonParseSection(){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL_GET_SECTION, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
