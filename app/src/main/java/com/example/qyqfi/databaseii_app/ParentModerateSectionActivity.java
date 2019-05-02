@@ -113,14 +113,14 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(ParentModerateSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(ParentModerateSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ParentModerateSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(ParentModerateSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -158,8 +158,8 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-//                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
-                            Toast.makeText(ParentModerateSectionActivity.this, "You have already moderated! ",Toast.LENGTH_LONG).show();
+//                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ParentModerateSectionActivity.this, "You have already moderated! ",Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_moderate_as_moderator.setVisibility(View.VISIBLE);
 
@@ -169,8 +169,8 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
-                        Toast.makeText(ParentModerateSectionActivity.this, "You have already Moderate! ",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ParentModerateSectionActivity.this, "You have already Moderate! ",Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         btn_moderate_as_moderator.setVisibility(View.VISIBLE);
                     }

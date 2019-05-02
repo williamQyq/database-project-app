@@ -102,10 +102,15 @@ public class LoginActivity extends AppCompatActivity {
                                     btn_login.setVisibility(View.VISIBLE);
 
                                 }
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Error! Incorrect email or password " ,Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
+                                btn_login.setVisibility(View.VISIBLE);
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(LoginActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
+//                            Toast.makeText(LoginActivity.this, "Error! " + e.toString(),Toast.).show();
+                            Toast.makeText(LoginActivity.this, "Error! Incorrect email or password " ,Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_login.setVisibility(View.VISIBLE);
                         }
@@ -114,7 +119,8 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
+//                        Toast.makeText(LoginActivity.this, "Error! " + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Error! Incorrect email or password " ,Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         btn_login.setVisibility(View.VISIBLE);
                     }

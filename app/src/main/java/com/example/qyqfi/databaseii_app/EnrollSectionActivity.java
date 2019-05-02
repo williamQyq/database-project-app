@@ -126,14 +126,14 @@ public class EnrollSectionActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -172,8 +172,8 @@ public class EnrollSectionActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-//                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
-                            Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_LONG).show();
+//                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_enroll_as_mtor.setVisibility(View.VISIBLE);
                             btn_enroll_as_mtee.setVisibility(View.VISIBLE);
@@ -183,8 +183,8 @@ public class EnrollSectionActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
-                        Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_LONG).show();
+//                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         btn_enroll_as_mtor.setVisibility(View.VISIBLE);
                         btn_enroll_as_mtee.setVisibility(View.VISIBLE);

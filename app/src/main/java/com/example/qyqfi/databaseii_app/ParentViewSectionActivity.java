@@ -105,7 +105,7 @@ public class ParentViewSectionActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ParentViewSectionActivity.this, "Section Clicked", Toast.LENGTH_LONG).show();
+                Toast.makeText(ParentViewSectionActivity.this, "Section Clicked", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ParentViewSectionActivity.this, ParentModerateSectionActivity.class);
                 intent.putExtra("cid",cid);
                 intent.putExtra("title",title);

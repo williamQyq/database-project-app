@@ -98,7 +98,8 @@ public class ParentRegisterActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(ParentRegisterActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_LONG).show();
+//                            Toast.makeText(ParentRegisterActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ParentRegisterActivity.this, "Register Error! You may enter Child Email incorrect",Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_regist.setVisibility(View.VISIBLE);
                         }
@@ -108,7 +109,8 @@ public class ParentRegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ParentRegisterActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ParentRegisterActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ParentRegisterActivity.this, "Register Error! You may enter Child Email incorrect",Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         btn_regist.setVisibility(View.VISIBLE);
                     }

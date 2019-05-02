@@ -99,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(RegisterActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_regist.setVisibility(View.VISIBLE);
                         }
@@ -109,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         btn_regist.setVisibility(View.VISIBLE);
                     }
