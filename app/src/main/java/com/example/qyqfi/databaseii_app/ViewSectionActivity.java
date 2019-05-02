@@ -105,7 +105,7 @@ public class ViewSectionActivity extends AppCompatActivity {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(ViewSectionActivity.this, "Section Clicked", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ViewSectionActivity.this, "Section Clicked", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ViewSectionActivity.this, EnrollSectionActivity.class);
                     intent.putExtra("cid",cid);
                     intent.putExtra("title",title);

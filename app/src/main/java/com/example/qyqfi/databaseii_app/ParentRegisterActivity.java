@@ -51,7 +51,6 @@ public class ParentRegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkPassword()) {
                     Regist();
-                    finish();
                 }
             }
         });
@@ -95,11 +94,16 @@ public class ParentRegisterActivity extends AppCompatActivity {
 
                             if(success.equals("1")){
                                 Toast.makeText(ParentRegisterActivity.this, "Register Success!",Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(ParentRegisterActivity.this, "Register Error! Email already exist",Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
+                                btn_regist.setVisibility(View.VISIBLE);
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
 //                            Toast.makeText(ParentRegisterActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_SHORT).show();
-                            Toast.makeText(ParentRegisterActivity.this, "Register Error! You may enter Child Email incorrect",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ParentRegisterActivity.this, "Register Success, but Child Email is incorrect",Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_regist.setVisibility(View.VISIBLE);
                         }

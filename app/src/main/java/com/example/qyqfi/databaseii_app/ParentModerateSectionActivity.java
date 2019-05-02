@@ -64,7 +64,6 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 moderate(extraEmail,cid,title,sec_id);
-                finish();
             }
         });
     }
@@ -155,11 +154,15 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
                                 loading.setVisibility(View.GONE);
                                 btn_moderate_as_moderator.setVisibility(View.VISIBLE);
 
+                            } else {
+                                Toast.makeText(ParentModerateSectionActivity.this, "This section has been moderate! ",Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
+                                btn_moderate_as_moderator.setVisibility(View.VISIBLE);
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
 //                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_SHORT).show();
-                            Toast.makeText(ParentModerateSectionActivity.this, "You have already moderated! ",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ParentModerateSectionActivity.this, "This section has been moderate! ",Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_moderate_as_moderator.setVisibility(View.VISIBLE);
 
@@ -170,7 +173,7 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 //                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_SHORT).show();
-                        Toast.makeText(ParentModerateSectionActivity.this, "You have already Moderate! ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ParentModerateSectionActivity.this, "This section has been moderate! ",Toast.LENGTH_SHORT).show();
                         loading.setVisibility(View.GONE);
                         btn_moderate_as_moderator.setVisibility(View.VISIBLE);
                     }

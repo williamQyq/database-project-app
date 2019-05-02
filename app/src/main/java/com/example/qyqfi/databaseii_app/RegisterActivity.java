@@ -52,7 +52,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkPassword()) {
                     Regist();
-                    finish();
                 }
             }
         });
@@ -96,10 +95,16 @@ public class RegisterActivity extends AppCompatActivity {
 
                             if(success.equals("1")){
                                 Toast.makeText(RegisterActivity.this, "Register Success!",Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Register Error! Email already exist",Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
+                                btn_regist.setVisibility(View.VISIBLE);
                             }
+
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(RegisterActivity.this, "Register Error! " + e.toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Register Error! Email already exist",Toast.LENGTH_SHORT).show();
                             loading.setVisibility(View.GONE);
                             btn_regist.setVisibility(View.VISIBLE);
                         }
@@ -109,7 +114,9 @@ public class RegisterActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(RegisterActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(RegisterActivity.this, "Register Error! " + error.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Register Error! Email already exist",Toast.LENGTH_SHORT).show();
+
                         loading.setVisibility(View.GONE);
                         btn_regist.setVisibility(View.VISIBLE);
                     }

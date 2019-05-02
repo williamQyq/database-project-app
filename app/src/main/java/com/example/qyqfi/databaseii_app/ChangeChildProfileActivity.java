@@ -53,7 +53,6 @@ public class ChangeChildProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkPassword()) {
                     Regist(extraEmail);
-                    finish();
                 }
             }
         });
@@ -98,6 +97,11 @@ public class ChangeChildProfileActivity extends AppCompatActivity {
 
                             if(success.equals("1")){
                                 Toast.makeText(ChangeChildProfileActivity.this, "Change Profile Success!",Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(ChangeChildProfileActivity.this, "Register Error! Child Email already exist",Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
+                                btn_regist.setVisibility(View.VISIBLE);
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
