@@ -5,11 +5,9 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,28 +28,27 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EnrollSectionActivity extends AppCompatActivity {
+public class ParentModerateSectionActivity extends AppCompatActivity {
 
-    private Button btn_enroll_as_mtor,btn_enroll_as_mtee;
+    private Button btn_moderate_as_moderator;
     private ProgressBar loading;
     private LinearLayout linearLayout;
     private String URL;
-    private String URL_MTOR_MTEE_INFO;
-    private static String name_URL_1 = "URL_ENROLL_MTEE_SECTION";
-    private static String name_URL_2 = "URL_ENROLL_MTOR_SECTION";
-    private static String getName_URL_3 = "URL_GET_MTOR_MTEE_INFO";
+    private String URL_MTOR_MTEE_MDTOR_INFO;
+    private static String name_URL_1 = "URL_MODERATE_MDTOR_SECTION";
+    private static String getName_URL_3 = "URL_GET_MTOR_MTEE_MDTOR_INFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enroll_section);
+        setContentView(R.layout.activity_parent_moderate_section);
 
-        URL_MTOR_MTEE_INFO = retrieveURL(getName_URL_3);
+        URL = retrieveURL(name_URL_1);
+        URL_MTOR_MTEE_MDTOR_INFO = retrieveURL(getName_URL_3);
 
         linearLayout = findViewById(R.id.rootLayout);
         loading = findViewById(R.id.loading);
-        btn_enroll_as_mtee = findViewById(R.id.btn_enroll_as_mtee);
-        btn_enroll_as_mtor = findViewById(R.id.btn_enroll_as_mtor);
+        btn_moderate_as_moderator = findViewById(R.id.btn_moderate_as_modtor);
 
         Intent intent = getIntent();
         final String extraEmail = intent.getStringExtra("email");
@@ -60,31 +57,13 @@ public class EnrollSectionActivity extends AppCompatActivity {
         final String sec_id = intent.getStringExtra("sec_id");
         String info = title + " "+sec_id;
         createTextViewGroup(info);
-//===================================================
-//        if (role.equals("mtee")){
-//            btn_enroll_as_mtor.setVisibility(View.GONE);
-//        }else if (role.equals("mtor")){
-//            btn_enroll_as_mtee.setVisibility(View.GONE);
-//        } else {
-//            btn_enroll_as_mtee.setVisibility(View.VISIBLE);
-//            btn_enroll_as_mtor.setVisibility(View.VISIBLE);
-//        }
-//working here===========================================
-        jsonParseMentorMentee(extraEmail,cid,title,sec_id);
 
-        btn_enroll_as_mtor.setOnClickListener(new View.OnClickListener() {
+        jsonParseMentorMenteeMdtor(extraEmail,cid,title,sec_id);
+
+        btn_moderate_as_moderator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    URL = retrieveURL(name_URL_2);
-                    enroll(extraEmail,cid,title,sec_id);
-                    finish();
-            }
-        });
-        btn_enroll_as_mtee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                URL = retrieveURL(name_URL_1);
-                enroll(extraEmail,cid,title,sec_id);
+                moderate(extraEmail,cid,title,sec_id);
                 finish();
             }
         });
@@ -97,8 +76,8 @@ public class EnrollSectionActivity extends AppCompatActivity {
         }
         return  null;
     }
-    private void jsonParseMentorMentee(final String email, final String cid, final String title, final String sec_id){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_MTOR_MTEE_INFO,
+    private void jsonParseMentorMenteeMdtor(final String email, final String cid, final String title, final String sec_id){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_MTOR_MTEE_MDTOR_INFO,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -107,8 +86,9 @@ public class EnrollSectionActivity extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             JSONArray jsonArrayMentees = jsonObject.getJSONArray("mentees");
                             JSONArray jsonArrayMentors = jsonObject.getJSONArray("mentors");
+                            JSONArray jsonArrayModerators = jsonObject.getJSONArray("moderators");
                             if(success.equals("1")){
-                                Toast.makeText(EnrollSectionActivity.this, "Successful load Mentor Mentee info!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ParentModerateSectionActivity.this, "Successful load Mentor Mentee info!", Toast.LENGTH_SHORT).show();
                                 String viewGroupTitleMentee = "\nMentees Name:";
                                 createTextViewGroup(viewGroupTitleMentee);
                                 for(int i = 0; i<jsonArrayMentees.length();i++){
@@ -123,17 +103,24 @@ public class EnrollSectionActivity extends AppCompatActivity {
                                     String mentor = mentorObject.getString("name").trim();
                                     createTextViewGroup(mentor);
                                 }
+                                String viewGroupTitleModerator = "\nModerators Name:";
+                                createTextViewGroup(viewGroupTitleModerator);
+                                for(int i = 0; i<jsonArrayModerators.length();i++){
+                                    JSONObject moderatorObject = jsonArrayModerators.getJSONObject(i);
+                                    String moderator = moderatorObject.getString("name").trim();
+                                    createTextViewGroup(moderator);
+                                }
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(ParentModerateSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(ParentModerateSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
                     }
                 })
         {
@@ -151,10 +138,9 @@ public class EnrollSectionActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-    private void enroll(final String email, final String cid, final String title, final String sec_id){
+    private void moderate(final String email, final String cid, final String title, final String sec_id){
         loading.setVisibility(View.VISIBLE);
-        btn_enroll_as_mtor.setVisibility(View.GONE);
-        btn_enroll_as_mtee.setVisibility(View.GONE);
+        btn_moderate_as_moderator.setVisibility(View.GONE);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
@@ -165,18 +151,18 @@ public class EnrollSectionActivity extends AppCompatActivity {
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
-                                    Toast.makeText(EnrollSectionActivity.this, "Successful Enroll!", Toast.LENGTH_SHORT).show();
-                                    loading.setVisibility(View.GONE);
-                                    btn_enroll_as_mtor.setVisibility(View.VISIBLE);
-                                    btn_enroll_as_mtee.setVisibility(View.VISIBLE);
+                                Toast.makeText(ParentModerateSectionActivity.this, "Successful Moderate!", Toast.LENGTH_SHORT).show();
+                                loading.setVisibility(View.GONE);
+                                btn_moderate_as_moderator.setVisibility(View.VISIBLE);
+
                             }
                         }catch(JSONException e){
                             e.printStackTrace();
 //                            Toast.makeText(EnrollSectionActivity.this, "Error! " + e.toString(),Toast.LENGTH_LONG).show();
-                            Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ParentModerateSectionActivity.this, "You have already moderated! ",Toast.LENGTH_LONG).show();
                             loading.setVisibility(View.GONE);
-                            btn_enroll_as_mtor.setVisibility(View.VISIBLE);
-                            btn_enroll_as_mtee.setVisibility(View.VISIBLE);
+                            btn_moderate_as_moderator.setVisibility(View.VISIBLE);
+
                         }
                     }
                 },
@@ -184,10 +170,9 @@ public class EnrollSectionActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 //                        Toast.makeText(EnrollSectionActivity.this, "Error! " + error.toString(),Toast.LENGTH_LONG).show();
-                        Toast.makeText(EnrollSectionActivity.this, "You have already Enrolled! ",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ParentModerateSectionActivity.this, "You have already Moderate! ",Toast.LENGTH_LONG).show();
                         loading.setVisibility(View.GONE);
-                        btn_enroll_as_mtor.setVisibility(View.VISIBLE);
-                        btn_enroll_as_mtee.setVisibility(View.VISIBLE);
+                        btn_moderate_as_moderator.setVisibility(View.VISIBLE);
                     }
                 })
         {

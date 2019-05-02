@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
     private static String iPAddress = "192.168.1.174";
+
     private Button btn_stu_regist,btn_par_regist,btn_stu_login,btn_par_login;
 
     @Override
@@ -57,9 +58,13 @@ public class HomeActivity extends AppCompatActivity {
         editor.putString("URL_CHANGE_CHILD_PROFILE","http://"+iPAddress+"/db_android/change_child_profile.php");
         editor.putString("URL_ENROLL_MTEE_SECTION","http://"+iPAddress+"/db_android/enroll_mtee_section.php");
         editor.putString("URL_ENROLL_MTOR_SECTION","http://"+iPAddress+"/db_android/enroll_mtor_section.php");
+        editor.putString("URL_MODERATE_MDTOR_SECTION","http://"+iPAddress+"/db_android/moderate_mdtor_section.php");
+
         editor.putString("URL_GET_SECTION","http://"+iPAddress+"/db_android/get_section.php");
         editor.putString("URL_REGIST","http://"+iPAddress+"/db_android/register.php");
         editor.putString("URL_PAR_REGIST","http://"+iPAddress+"/db_android/parent_register.php");
+        editor.putString("URL_GET_MTOR_MTEE_INFO","http://"+iPAddress+"/db_android/get_mtor_mtee_info.php");
+        editor.putString("URL_GET_MTOR_MTEE_MDTOR_INFO","http://"+iPAddress+"/db_android/get_mtor_mtee_mdtor_info.php");
 
         editor.apply();
     }

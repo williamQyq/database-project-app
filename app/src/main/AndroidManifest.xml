@@ -3,7 +3,7 @@
     package="com.example.qyqfi.databaseii_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -29,7 +29,9 @@
         <activity android:name=".ParentMainMenuActivity" />
         <activity android:name=".ChangeChildProfileActivity" />
         <activity android:name=".ViewSectionActivity" />
-        <activity android:name=".EnrollSectionActivity"></activity>
+        <activity android:name=".EnrollSectionActivity" />
+        <activity android:name=".ParentViewSectionActivity" />
+        <activity android:name=".ParentModerateSectionActivity"></activity>
     </application>
 
 </manifest>

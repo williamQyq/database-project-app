@@ -62,7 +62,7 @@ public class ParentMainMenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void openViewSectionActivity(String email){
-        Intent intent = new Intent(this, ViewSectionActivity.class);
+        Intent intent = new Intent(this, ParentViewSectionActivity.class);
         intent.putExtra("email",email);
         startActivity(intent);
     }

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -23,7 +22,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ViewSectionActivity extends AppCompatActivity {
+public class ParentViewSectionActivity extends AppCompatActivity {
+
     private LinearLayout linearLayout;
     private RequestQueue mQueue;
     private String URL_GET_SECTION;
@@ -33,7 +33,7 @@ public class ViewSectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_section);
+        setContentView(R.layout.activity_parent_view_section);
 
         URL_GET_SECTION = retrieveURL(name_URL);
 
@@ -77,8 +77,8 @@ public class ViewSectionActivity extends AppCompatActivity {
                                 String weekDay = sections.getString("weekDay");
 
                                 String section_info = title+" "+sec_id+" "+
-                                                        weekDay+";"+startTime+"-"+endTime+ " "+
-                                                        startDate+"-"+endDate;
+                                        weekDay+";"+startTime+"-"+endTime+ " "+
+                                        startDate+"-"+endDate;
                                 createTextViewGroup(cid,title,sec_id,section_info);
                             }
                         } catch (JSONException e) {
@@ -95,27 +95,27 @@ public class ViewSectionActivity extends AppCompatActivity {
     }
     public void createTextViewGroup(final String cid, final String title, final String sec_id, String section_info){
         // Create TextView programmatically.
-            TextView textView = new TextView(this);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            textView.setPadding(30,20,30,20);
-            textView.setText(section_info);
-            textView.setTextColor(Color.BLACK);
-            textView.setTextSize(18);
+        TextView textView = new TextView(this);
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setPadding(30,20,30,20);
+        textView.setText(section_info);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(18);
 
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(ViewSectionActivity.this, "Section Clicked", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(ViewSectionActivity.this, EnrollSectionActivity.class);
-                    intent.putExtra("cid",cid);
-                    intent.putExtra("title",title);
-                    intent.putExtra("sec_id",sec_id);
-                    intent.putExtra("email",extralEmail);
-                    startActivity(intent);
-                }
-            });
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ParentViewSectionActivity.this, "Section Clicked", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ParentViewSectionActivity.this, ParentModerateSectionActivity.class);
+                intent.putExtra("cid",cid);
+                intent.putExtra("title",title);
+                intent.putExtra("sec_id",sec_id);
+                intent.putExtra("email",extralEmail);
+                startActivity(intent);
+            }
+        });
 
-            // Add TextView to LinearLayout
-            linearLayout.addView(textView);
-        }
+        // Add TextView to LinearLayout
+        linearLayout.addView(textView);
+    }
 }
