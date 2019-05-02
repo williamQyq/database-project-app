@@ -84,6 +84,13 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <RadioButton
+        android:id="@+id/radioButtonModerator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Moderator" />
+
     <Button
         android:id="@+id/btn_regist"
         android:backgroundTint="@color/colorPrimary"

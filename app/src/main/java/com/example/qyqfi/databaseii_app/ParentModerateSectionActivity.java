@@ -104,7 +104,7 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
                                 }
                                 String viewGroupTitleModerator = "\nModerators Name:";
                                 createTextViewGroup(viewGroupTitleModerator);
-                                for(int i = 0; i<jsonArrayModerators.length();i++){
+                                for(int i = 0; i<jsonArrayModerators.length();i++) {
                                     JSONObject moderatorObject = jsonArrayModerators.getJSONObject(i);
                                     String moderator = moderatorObject.getString("name").trim();
                                     createTextViewGroup(moderator);
@@ -153,7 +153,7 @@ public class ParentModerateSectionActivity extends AppCompatActivity {
                                 Toast.makeText(ParentModerateSectionActivity.this, "Successful Moderate!", Toast.LENGTH_SHORT).show();
                                 loading.setVisibility(View.GONE);
                                 btn_moderate_as_moderator.setVisibility(View.VISIBLE);
-
+                                finish();
                             } else {
                                 Toast.makeText(ParentModerateSectionActivity.this, "This section has been moderate! ",Toast.LENGTH_SHORT).show();
                                 loading.setVisibility(View.GONE);
